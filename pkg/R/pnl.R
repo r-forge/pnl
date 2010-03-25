@@ -1,6 +1,6 @@
 ###########################################################################################################
 # pnl - Calculate trading-, unrealized- and realized profit and loss.
-#
+# 
 # @param pseries xts timeseries with prices
 # @param closepricecol the column number in pseries that holds the close prices
 # @param txn xts timeseries with transactions
