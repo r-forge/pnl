@@ -1,0 +1,14 @@
+Package: pnl
+Type: Package
+Title: Profit and Loss calculation for financial instruments and portfolio's.
+Version: 0.1
+Date: 
+Author: Mark Breman
+Maintainer: Mark Breman <breman.mark@gmail.com>
+Description: Profit&Loss calculation for financial instruments and portfolio's as used in trading systems. Aimed at doing a limited amount of tasks fast and well. Heavily based on xts-timeseries.
+License: GPL
+LazyLoad: yes
+Depends: R (>= 2.9.0), xts, RUnit
+Suggests: quantmod
+URL: http://r-forge.r-project.org/projects/pnl/
+Copyright: (c) 2010

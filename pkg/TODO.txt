@@ -1,0 +1,8 @@
+# TODO:
+#- add derivatives: multiplier, options + corporate actions
+#- incremental calculation?
+#- add currency support
+#- add support for other prices except close?
+#- 0 row is temporarly inserted in calcPnl() with date 1970-01-01 (Date(0)). No pricedate before this date is possible.
+#- start portfolio/instrument with an averaged entry, in case old pricedata is not available and portfolio can't be build from the start.
+#- add stock dividends
