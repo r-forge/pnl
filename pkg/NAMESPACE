@@ -1,3 +1,3 @@
-export(addDiv)
-export(addTxn)
+export(addDvd)
+export(addTrans)
 export(pnl)

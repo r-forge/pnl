@@ -4,7 +4,7 @@
 # 0 = cumdate cash dividend
 # 1 = paydate cash dividend
 #################################################################################
-addDiv <-
+addDvd <-
 function(corp, cumdate, paydate, amount=0.0) {
 	corp = rbind(corp, xts(matrix(c(0, 1, amount, amount), nrow=2), c(as.Date(cumdate), as.Date(paydate))))
 

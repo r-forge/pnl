@@ -33,7 +33,7 @@ function(pseries, closepricecol=1, txn=NULL, corp=NULL) {
 			pseries$udiv=0
 			pseries$rdiv=0
 		} else {
-			pseries = calcDiv(pseries, txn, corp)
+			pseries = calcDvd(pseries, txn, corp)
 		}
 
 		pseries = calcPnl(pseries, closepricecol, txn)

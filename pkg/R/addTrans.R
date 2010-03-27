@@ -4,7 +4,7 @@
 # @param txn xts timeseries with transactions
 # @author Mark Breman
 # @export
-addTxn <-
+addTrans <-
 function(txn, date=as.character(Sys.Date()), size=0, price=0.0, fees=0.0) {
 	if(fees > 0) stop("fees must be <= 0")
  

@@ -3,11 +3,11 @@
 # and add to series
 #	
 # constraints:
-# - dividends cumdate <= dividends paydate
+# - dividend cumdate <= dividend paydate
 # - dividendN cumdate > dividendN-1 paydate
 #
 ##################################################################################
-calcDiv <-
+calcDvd <-
 function(series, txn, corp) {
 	divs=corp[which(corp$type %in% c(0,1)),]
 

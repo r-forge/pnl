@@ -7,8 +7,8 @@ prices = c(23.07, 23.05, 23.06, 23.09, 23.28, 23.36)
 pseries = xts(prices, as.POSIXct(strptime(paste("2009-01-", seq(1:length(prices)), sep=""),"%Y-%m-%d")))
 colnames(pseries) = "Close"
 
-txn = addTxn(NULL, date='2009-01-02', size=36, price=23.05, fees=-1.0)
-txn = addTxn(txn, date='2009-01-04', size=-36, price=23.09, fees=-1.0)
+txn = addTrans(NULL, date='2009-01-02', size=36, price=23.05, fees=-1.0)
+txn = addTrans(txn, date='2009-01-04', size=-36, price=23.09, fees=-1.0)
 
 res = pnl(pseries, txn=txn)
 
