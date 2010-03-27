@@ -13,9 +13,9 @@ function(series, txn, corp) {
 
 	if(!is.null(txn) & !is.null(divs)) {
 		# remove columns from possible previous runs
-		if("rdiv" %in% colnames(series)) series$rdiv = NULL
-		if("diva" %in% colnames(series)) series$diva = NULL
-		if("udiv" %in% colnames(series)) series$udiv = NULL
+		if("rdvd" %in% colnames(series)) series$rdvd = NULL
+		if("dvda" %in% colnames(series)) series$dvda = NULL
+		if("udvd" %in% colnames(series)) series$udvd = NULL
 		
 		divs = rbind(divs, xts(matrix(c(0,0), ncol=2), as.Date(0)))
 		txn = rbind(txn, xts(matrix(c(0,0,0), ncol=3), as.Date(0)))
@@ -24,23 +24,23 @@ function(series, txn, corp) {
 		divs = cbind(divs, na.locf(cbind(divs, txn$pos)$pos), join="left")
 
 		# add realized dividends
-		divs$rdiv = round(lag(divs$pos) * divs$amount, 2)
-		series = cbind(series, divs[-1, "rdiv"], fill=0)
+		divs$rdvd = round(lag(divs$pos) * divs$amount, 2)
+		series = cbind(series, divs[-1, "rdvd"], fill=0)
 
 		# add dividend amount
-		diva = divs[which(divs$type==0), c("pos", "amount")]
-		colnames(diva) = c("pos", "diva")
-		series = cbind(series, diva[-1, "diva"], fill=0)
+		dvda = divs[which(divs$type==0), c("pos", "amount")]
+		colnames(dvda) = c("pos", "dvda")
+		series = cbind(series, dvda[-1, "dvda"], fill=0)
 
 		# add unrealized dividend
-		# TODO: udiv should not depend on rdiv, but how? 
-		series$udiv = cumsum(round(series[, "diva"] * series[, "pos"] - series$rdiv, 2))
+		# TODO: udvd should not depend on rdvd, but how? 
+		series$udvd = cumsum(round(series[, "dvda"] * series[, "pos"] - series$rdvd, 2))
 
 	
 	} else {
-	 	series$diva=0
-		series$udiv = 0
-		series$rdiv = 0
+	 	series$dvda=0
+		series$udvd = 0
+		series$rdvd = 0
 	}
 
 	return(series)

@@ -29,9 +29,9 @@ function(pseries, closepricecol=1, txn=NULL, corp=NULL) {
 		pseries$pos = cumsum(pseries$size)
 
 		if(is.null(corp)) {
-			pseries$diva=0
-			pseries$udiv=0
-			pseries$rdiv=0
+			pseries$dvda=0
+			pseries$udvd=0
+			pseries$rdvd=0
 		} else {
 			pseries = calcDvd(pseries, txn, corp)
 		}
@@ -39,6 +39,6 @@ function(pseries, closepricecol=1, txn=NULL, corp=NULL) {
 		pseries = calcPnl(pseries, closepricecol, txn)
 	}
 
-	return(pseries[, c("size", "price", "fees", "pos", "diva", "udiv", "rdiv", "tpnl", "upnl", "rpnl")])
+	return(pseries[, c("size", "price", "fees", "pos", "dvda", "udvd", "rdvd", "tpnl", "upnl", "rpnl")])
 }
 
