@@ -1,18 +1,18 @@
 ##################################################################################
 # Calculate trading-, unrealized- and realized pnl from transactions and price
-# series.
+# pseries.
 #
 ##################################################################################
 calcPnl <-
-function(series, closepricecol, txn) {
-	series$tpnl = (series$pos * series[,closepricecol]) - (lag(series$pos) * lag(series[,closepricecol])) + (-(series$size) * series$price)
-	series[is.na(series$tpnl), "tpnl"] = 0	# remove NA's from top row caused by lag()
+function(pseries, closepricecol, txn) {
+	pseries$tpnl = (pseries$pos * pseries[,closepricecol]) - (lag(pseries$pos) * lag(pseries[,closepricecol])) + (-(pseries$size) * pseries$price)
+	pseries[is.na(pseries$tpnl), "tpnl"] = 0	# remove NA's from top row caused by lag()
 	
 	# Calculate realized pnl from transactions
 	if(!is.null(txn)) {
-		if("rpnl" %in% colnames(series)) series$rpnl = NULL
+		if("rpnl" %in% colnames(pseries)) pseries$rpnl = NULL
 
-		txn = rbind(txn, xts(matrix(c(0,0,0), ncol=3), as.Date(0)))
+		txn = rbind(txn, xts(matrix(c(0,0,0), ncol=3), as.Date("1970-01-01")))
 
 		txn$pos = cumsum(txn$size)
 		txn$ec = (-(txn$size) * txn$price) + txn$fees
@@ -23,16 +23,16 @@ function(series, closepricecol, txn) {
 		t[which(t[, "pos"]==0), "rpnl"] = c(0, diff(t[which(t[,"pos"]==0), "cumec"]))
 		txn$rpnl = t[, "rpnl"]
 
-		series = cbind(series, as.xts(txn[-1, "rpnl"]), fill=0)
+		pseries = cbind(pseries, as.xts(txn[-1, "rpnl"]), fill=0)
 		
 	} else {
-		series$rpnl = 0
+		pseries$rpnl = 0
 	}
 
 	# TODO: upnl should not depend on rpnl, but how to do this without falling back on a loop? 
-	series$upnl = cumsum(series$tpnl + series$fees - series$rpnl)
+	pseries$upnl = cumsum(pseries$tpnl + pseries$fees - pseries$rpnl)
 
-	series[is.na(series$upnl), "upnl"] = 0	# remove NA from  top row caused by cumsum()
+	pseries[is.na(pseries$upnl), "upnl"] = 0	# remove NA from  top row caused by cumsum()
 
-	return(series)
+	return(pseries)
 }
