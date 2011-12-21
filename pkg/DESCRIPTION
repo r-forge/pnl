@@ -1,7 +1,7 @@
 Package: pnl
 Type: Package
 Title: Profit and Loss calculation for financial instruments and portfolio's.
-Version: 0.1
+Version: 0.2
 Date: 
 Author: Mark Breman
 Maintainer: Mark Breman <breman.mark@gmail.com>
