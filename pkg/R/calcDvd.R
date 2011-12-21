@@ -17,8 +17,8 @@ function(series, txn, corp) {
 		if("dvda" %in% colnames(series)) series$dvda = NULL
 		if("udvd" %in% colnames(series)) series$udvd = NULL
 		
-		divs = rbind(divs, xts(matrix(c(0,0), ncol=2), as.Date(0)))
-		txn = rbind(txn, xts(matrix(c(0,0,0), ncol=3), as.Date(0)))
+		divs = rbind(divs, xts(matrix(c(0,0), ncol=2), as.Date("1970-01-01")))
+		txn = rbind(txn, xts(matrix(c(0,0,0), ncol=3), as.Date("1970-01-01")))
 
 		txn$pos = cumsum(txn$size)
 		divs = cbind(divs, na.locf(cbind(divs, txn$pos)$pos), join="left")
